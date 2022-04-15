@@ -1,0 +1,32 @@
+/*
+ * Biblioteca.h
+ *
+ *  Created on: Apr 9, 2022
+ *      Author: dante
+ */
+
+#ifndef BIBLIOTECA_H_
+#define BIBLIOTECA_H_
+#include <stdio.h>
+#include <stdlib.h>
+int GetInt (char mensaje[], int reintentos, int minimo, int maximo, char mensajeError[], int *pNumeroIngresado);
+int GetFloat (char mensaje[], int reintentos, float minimo, float maximo, char mensajeError[], float *pNumeroIngresado);
+int GetInt_simple (char mensaje[], char mensajeError[], float *pNumeroIngresado);
+void CargarArray (int array[], int tamano);
+void ImprimirArray (float array[], int tamano);
+int VuelosMenu (int *pNumeroIngresado, char mensaje[], int reintentos, int maximo, int minimo, char opcion1[], char opcion2[], char opcion3[],
+		char opcion4[], float kilometros, float precioAerolineas, float precioLatam);
+float Sumar (float numero1, float numero2);
+float Restar (float numero1, float numero2);
+float Multiplicar (float numero1, float numero2);
+float Dividir (float divisor, float dividendo);
+int GetFloatPositivo (char mensaje[], float *pNumeroIngresado, char mensajeError[], int reintentos);
+int CalcularOperacionesVuelos (float kilometros, float precioVuelo, float *costoDebito, float *costoCredito, float *costoBitcoin,
+			       float *costoPorKilometro);
+int CalcularPorReglaSimple (float primerNumero, float segundoNumero, float tercerNumero, float *resultado);
+int ImprimirResultadosVuelos (char mensaje[],float precioVuelo, float gastoDebito, float gastoCredito, float gastoBitcoin, float gastoPorKilometro);
+int ImprimirDiferencia (float primerNumero, float segundoNumero, char mensaje[]);
+int CargaForzadaVuelos(float kilometrosPrueba, float precioAerolineasPrueba, float precioLatamPrueba);
+
+
+#endif /* BIBLIOTECA_H_ */

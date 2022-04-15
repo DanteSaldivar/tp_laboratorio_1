@@ -1,0 +1,55 @@
+/*
+ ============================================================================
+ Name        : TrabajoPractico01.c
+ Author      : 
+ Version     :
+ Copyright   : Your copyright notice
+ Description : Hello World in C, Ansi-style
+ ============================================================================
+ */
+
+#include "Biblioteca.h"
+
+int main (void)
+{
+
+  int numeroIngresado;
+  float kilometrosIngresado;
+  float precioAerolineaIngresado;
+  float precioLatamIngresado;
+  float preciosFinalesAerolinea[4];
+  float preciosFinalesLatam[4];
+  int erroresDetectados;
+
+  do
+  {
+    erroresDetectados = AerolineasMenu (&numeroIngresado);
+    if (erroresDetectados == 0)
+    {
+
+      switch (numeroIngresado)
+      {
+	case 1:
+	  erroresDetectados = GetFloatPositivo ("Ingrese los Kilometros: ", &kilometrosIngresado, "~~~ERRORR~~~\nEl valor no es valido.");
+	  break;
+	case 2:
+	  erroresDetectados = GetFloatPositivo ("Ingrese el precio de Aerolineas: ", &precioAerolineaIngresado,"~~~ERRORR~~~\El precio no es valido.");
+	  erroresDetectados = GetFloatPositivo ("Ingrese el precio del vuelo Latam: ", &precioLatamIngresado, "~~~ERRORR~~~\El precio no es valido.");
+	  break;
+	case 3:
+	  CalculosPrecioVuelos (kilometrosIngresado, precioAerolineaIngresado, preciosFinalesAerolinea);
+	  CalculosPrecioVuelos (kilometrosIngresado, precioLatamIngresado, preciosFinalesLatam);
+	  break;
+	case 4:
+	  ImprimirResultadosVuelos (kilometrosIngresado, "Aerolineas", precioAerolineaIngresado, preciosFinalesAerolinea, 4);
+	  break;
+	case 5:
+	  break;
+	case 6:
+	  puts ("Buenas noches");
+	  break;
+      }
+    }
+  }while (numeroIngresado != 6||numeroIngresado != 4 || numeroIngresado != 5 );
+  return 0;
+}

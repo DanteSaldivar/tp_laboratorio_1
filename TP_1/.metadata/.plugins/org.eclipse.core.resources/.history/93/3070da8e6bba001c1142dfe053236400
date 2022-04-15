@@ -1,0 +1,37 @@
+/*
+ ============================================================================
+ Name        : TrabajoPractico01.c
+ Author      : 
+ Version     :
+ Copyright   : Your copyright notice
+ Description : Hello World in C, Ansi-style
+ ============================================================================
+ */
+
+#include "Biblioteca.h"
+
+int main(void) {
+
+   int numeroIngresado;
+   float kilometrosIngresado;
+   float precioAerolineaIngresado;
+   float precioLatamIngresado;
+   float preciosFinalesAerolinea[4];
+   int erroresDetectados;
+
+
+   erroresDetectados=AerolineasMenu(&numeroIngresado);
+
+
+   if (erroresDetectados==0)
+   {
+     erroresDetectados=OperacionesVuelos(numeroIngresado, &kilometrosIngresado, &precioAerolineaIngresado, &precioLatamIngresado);
+
+     CalculosVuelos(kilometrosIngresado, precioAerolineaIngresado, &preciosFinalesAerolinea);
+
+     ImprimirArray(preciosFinalesAerolinea, 4);
+   }
+
+
+    return 0;
+}

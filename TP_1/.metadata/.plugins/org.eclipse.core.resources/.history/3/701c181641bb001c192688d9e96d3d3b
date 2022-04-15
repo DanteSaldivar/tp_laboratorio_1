@@ -1,0 +1,49 @@
+/*
+ ============================================================================
+ Name        : TrabajoPractico01.c
+ Author      : 
+ Version     :
+ Copyright   : Your copyright notice
+ Description : Hello World in C, Ansi-style
+ ============================================================================
+ */
+
+#include "Biblioteca.h"
+#define PRICE_TEST_AEROLINEAS 162965
+#define PRICE_TEST_LATAM 159339
+#define KILOMETROS_TEST	7090
+int main (void)
+{
+  int opcionElegida;
+  float kilometrosIngresados;
+  int numeroDeError;
+
+  do
+  {
+    numeroDeError = GetInt ("================= Menu Principal =================\n\n1-Ingresar Kilometros\n2-Ingresar Precio de Vuelos\n3-Calcular Todos los costos\n"
+     "5-Carga Forzada\n6-Salir\n",3, 1, 6, "La opcion no es valida, reintente: ", &opcionElegida);
+
+    switch (opcionElegida)
+    {
+      case 1:
+	  numeroDeError = GetFloatPositivo("Ingrese los Kilometros: ",&kilometrosIngresados, "La distancia no es valida, reintente: ",3);
+	break;
+      case 2:
+      	break;
+      case 3:
+      	break;
+      case 4:
+      	break;
+      case 5:
+      	break;
+      default:
+	  puts("=================================");
+	break;
+    }
+    if (numeroDeError == -1)
+    {
+      puts("\n\n\t\tOcurrio un Error, un dato no pudo ser validado. Reincie el programa.");
+      break;
+    }
+  }while (opcionElegida != 4 && opcionElegida != 5 && opcionElegida != 6);
+}

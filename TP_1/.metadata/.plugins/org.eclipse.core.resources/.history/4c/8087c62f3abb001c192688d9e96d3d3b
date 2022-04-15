@@ -1,0 +1,23 @@
+/*
+ ============================================================================
+ Name        : TrabajoPractico01.c
+ Author      : 
+ Version     :
+ Copyright   : Your copyright notice
+ Description : Hello World in C, Ansi-style
+ ============================================================================
+ */
+
+#include "Biblioteca.h"
+#define PRICE_TEST_AEROLINEAS 162965
+#define PRICE_TEST_LATAM 159339
+#define KILOMETROS_TEST	7090
+int main (void)
+{
+  int opcionElegida;
+
+  VuelosMenu(&opcionElegida);
+
+  printf("\t\t%d", opcionElegida);
+
+}

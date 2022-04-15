@@ -1,0 +1,320 @@
+/*
+ * Biblioteca.c
+ *
+ *  Created on: Apr 9, 2022
+ *      Author: dante
+ */
+
+#include "Biblioteca.h"
+
+//PEDIR DATOS
+
+int GetInt (char mensaje[], int reintentos, int minimo, int maximo, char mensajeError[], int *pNumeroIngresado)
+{
+  int retorno = -1;
+  int auxiliarInt;
+  int retornoScanf;
+
+  if (mensaje != NULL && minimo < maximo && mensajeError != NULL && pNumeroIngresado != NULL && reintentos > 0)
+  {
+    printf ("%s", mensaje);
+    retornoScanf = scanf ("%d", &auxiliarInt);
+
+    do
+    {
+      if (retornoScanf != 1 || auxiliarInt > maximo || auxiliarInt < minimo)
+      {
+	printf ("%s", mensajeError);
+	retornoScanf = scanf ("%d", &auxiliarInt);
+	reintentos--;
+      }
+      else
+      {
+	reintentos = 0;
+	*pNumeroIngresado = auxiliarInt;
+	retorno = 0;
+      }
+    }
+    while (reintentos > 0);
+  }
+  return retorno;
+}
+int GetFloat (char mensaje[], int reintentos, float minimo, float maximo, char mensajeError[], float *pNumeroIngresado)
+{
+  int retorno = -1;
+  float auxiliarInt;
+  int retornoScanf;
+
+  if (mensaje != NULL && minimo < maximo && mensajeError != NULL && pNumeroIngresado != NULL && reintentos > 0)
+  {
+    printf ("%s", mensaje);
+    retornoScanf = scanf ("%f", &auxiliarInt);
+
+    do
+    {
+      if (retornoScanf != 1 || auxiliarInt > maximo || auxiliarInt < minimo)
+      {
+	printf ("%s", mensajeError);
+	retornoScanf = scanf ("%f", &auxiliarInt);
+	reintentos--;
+      }
+      else
+      {
+	reintentos = 0;
+	*pNumeroIngresado = auxiliarInt;
+	retorno = 0;
+      }
+    }
+    while (reintentos > 0);
+  }
+  return retorno;
+}
+int GetInt_simple (char mensaje[], char mensajeError[], float *pNumeroIngresado)
+{
+  int retorno = -1;
+  int auxiliarInt;
+  int retornoScanf;
+
+  printf ("%s", mensaje);
+  retornoScanf = scanf ("%d", &auxiliarInt);
+  if (retornoScanf != 0)
+  {
+    printf ("%s", mensajeError);
+    retornoScanf = scanf ("%d", &auxiliarInt);
+  }
+  else
+  {
+    *pNumeroIngresado = auxiliarInt;
+    retorno = 0;
+  }
+  return retorno;
+}
+void CargarArray (int array[], int tamano)
+{
+  for (int i = 0; i < tamano; i++)
+  {
+    array[i] = i;
+  }
+}
+void ImprimirArray (float array[], int tamano)
+{
+  for (int i = 0; i < tamano; i++)
+  {
+    printf ("\n%f", array[i]);
+  }
+}
+void MainMenu (int *pNumeroIngresado, char mensaje[], int reintentos,maximo,minimo, char opcion1[], char opcion2[], char opcion3[], char opcion4[], char opcion5[],
+	       char opcion6[], float kilometros, float precioAerolineas, float precioLatam)
+{
+  int auxiliar;
+  int retornoScanf;
+  int retorno;
+
+  retorno=-1;
+
+  puts ("=====================================================================================");
+
+  if (mensaje != NULL && opcion1 != NULL && opcion2 != NULL && opcion3 != NULL && opcion4 != NULL && opcion5 != NULL && opcion6 != NULL && reintentos > 0 && minimo<maximo)
+  {
+    printf ("%s", mensaje);
+    printf ("\n%s(km = %.2f)\n\n%s (Aerolineas = %.2f/Latam = %.2f)\n\n%s\n\n%s\n\n%s\n%s ", opcion1,kilometros,opcion2,precioAerolineas,precioLatam, opcion3, opcion4, opcion5, opcion6);
+    retornoScanf = scanf ("%d", &auxiliar);
+
+   do
+    {
+      if (auxiliar != 1 && auxiliar != 2 && auxiliar != 3 && auxiliar != 4 && auxiliar != 5 && auxiliar != 6)
+      {
+	puts ("\n~~~~~~ERROR~~~~~~~~~");
+	printf ("\n1-%s\n2-para %s\n3-%s\n4-%s\n5-%s\n6-%s ", opcion1, opcion2, opcion3, opcion4, opcion5, opcion6);
+	scanf ("%d", &auxiliar);
+	reintentos--;
+      }
+      else
+      {
+	reintentos = 0;
+	*pNumeroIngresado = auxiliar;
+      }
+    } while (reintentos>0);
+  }
+  else
+  {
+    puts ("\n\t\t\t~~~~~~ERROR~~~~~~~~~\n\t\tIngrese las condiciones nuevamente");
+  }
+}
+
+int VuelosMenu (int *pNumeroIngresado)
+{
+  int retorno = -1;
+
+  if (GetInt (
+      "================= Menu Principal =================\n\n1-Ingresar Kilometros\n2-Ingresar Precio de Vuelos\n3-Calcular Todos los costos\n"
+      "5-Carga Forzada\n6-Salir\n",
+      3, 1, 6, "La opcion no es valida, reintente ", pNumeroIngresado) == 0)
+  {
+    printf ("Todo va bien por ahora");
+    retorno = 0;
+  }
+
+  return retorno;
+}
+int GetFloatPositivo (char mensaje[], float *pNumeroIngresado, char mensajeError[], int reintentos)
+{
+  int retorno = -1;
+  float auxiliarInt;
+  int retornoScanf;
+
+  if (mensaje != NULL && mensajeError != NULL && reintentos > 0 && pNumeroIngresado != NULL)
+  {
+    printf ("%s", mensaje);
+    retornoScanf = scanf ("%f", &auxiliarInt);
+    do
+    {
+      if (retornoScanf != 1 || auxiliarInt < 0)
+      {
+	printf ("%s", mensajeError);
+	retornoScanf = scanf ("%f", &auxiliarInt);
+	reintentos--;
+      }
+      else
+      {
+	reintentos = 0;
+	*pNumeroIngresado = auxiliarInt;
+	retorno = 0;
+      }
+    }
+    while (reintentos > 0);
+  }
+
+  return retorno;
+}
+void ImprimirResultadosVuelos (float kilometrosIngresados, char nombrecompania[], float precioVuelo, float preciosVuelos[], int tamano)
+{
+  int i;
+  printf ("KMs Ingresados: %.2f KM", kilometrosIngresados);
+  printf ("\n\nPrecio %s: %.2f", nombrecompania, precioVuelo);
+  for (i = 0; i < tamano; i++)
+  {
+    switch (i)
+    {
+      case 0:
+	printf ("\na) Precio con tarjeta de debito: $ %.2f", preciosVuelos[0]);
+	break;
+      case 1:
+	printf ("\nb) Precio con tarjeta de credito: $ %.2f", preciosVuelos[1]);
+	break;
+      case 2:
+	printf ("\nc) Precio pagando con Bitcoin: %.2f BTC", preciosVuelos[2]);
+	break;
+      case 3:
+	printf ("\nd) Mostrar precio Unitario: $ %.2f\n\n", preciosVuelos[3]);
+	break;
+    }
+  }
+}
+void imprimirDiferencia (float primerNumero, float segundoNumero, char mensaje[])
+{
+  float diferencia;
+  diferencia = Restar (primerNumero, segundoNumero);
+  printf ("%s%.2f", mensaje, diferencia);
+}
+int imprimirResultadosVuelos (float precioVuelo, float gastoDebito, float gastoCredito, float gastoBitcoin, float gastoPorKilometro)
+{
+  int retorno;
+
+  retorno=-1;
+
+  if (precioVuelo > 1 && gastoDebito > 1 && gastoCredito > 1 && gastoBitcoin > 1 && gastoPorKilometro > 1 )
+  {
+    printf("jajaj");
+  }
+  return retorno;
+}
+//CALCULOS
+
+float Sumar (float numero1, float numero2)
+{
+  float resultado;
+  resultado = numero1 + numero2;
+  return resultado;
+}
+float Restar (float numero1, float numero2)
+{
+  float resultado;
+  resultado = numero1 - numero2;
+  return resultado;
+}
+float Multiplicar (float numero1, float numero2)
+{
+  float resultado;
+  resultado = numero1 * numero2;
+  return resultado;
+}
+float Dividir (float divisor, float dividendo)
+{
+  float cociente;
+  if (dividendo != 0)
+  {
+    cociente = divisor / dividendo;
+  }
+  else
+  {
+    cociente = 0;
+  }
+  return cociente;
+}
+int calcularPorReglaSimple (float primerNumero, float segundoNumero, float tercerNumero, float *resultado)
+{
+  int retorno;
+
+  retorno = -1;
+
+  if (primerNumero != 0 && resultado != NULL)
+  {
+    *resultado = (tercerNumero * segundoNumero) / primerNumero;
+    retorno = 0;
+  }
+
+  return retorno;
+}
+int calcularOperacionesVuelos (float kilometros, float precioVuelo, float *costoDebito, float *costoCredito, float *costoBitcoin,
+			       float *costoPorKilometro)
+{
+  float retorno;
+  float descuentoDebito;
+  float aumentoCredito;
+  float precioBitcoin;
+  float precioKilometro;
+  int descuento;
+  int aumento;
+  float bitcoin;
+
+  retorno = 0;
+  descuento = 10;
+  aumento = 25;
+  bitcoin = 4606954.55;
+
+  if(costoDebito != NULL && costoCredito != NULL && costoBitcoin != NULL && costoPorKilometro != NULL)
+  {
+    retorno += calcularPorReglaSimple(100,precioVuelo, descuento, &descuentoDebito);
+    retorno += calcularPorReglaSimple(100,precioVuelo, aumento, &aumentoCredito);
+    retorno += calcularPorReglaSimple(precioVuelo, 1, bitcoin, &precioBitcoin);
+    retorno += calcularPorReglaSimple(kilometros, precioVuelo, 1, &precioKilometro);
+
+    if (retorno == 0)
+    {
+      *costoDebito = Restar(precioVuelo, descuentoDebito);
+      *costoCredito = Sumar(precioVuelo,aumentoCredito);
+      *costoBitcoin = precioBitcoin;
+      *costoPorKilometro = precioKilometro;
+      retorno = 0;
+    }
+    else
+    {
+      puts("\n\n Hubo un error al calcular los datos.");
+      retorno = -1;
+    }
+  }
+
+  return retorno;
+}
+

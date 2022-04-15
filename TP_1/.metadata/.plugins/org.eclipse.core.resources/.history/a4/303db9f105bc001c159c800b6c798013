@@ -1,0 +1,75 @@
+/*
+ ============================================================================
+ Name        : TrabajoPractico01.c
+ Author      : 
+ Version     :
+ Copyright   : Your copyright notice
+ Description : Hello World in C, Ansi-style
+ ============================================================================
+ */
+
+#include "Biblioteca.h"
+#define PRICE_TEST_AEROLINEAS 162965
+#define PRICE_TEST_LATAM 159339
+#define KILOMETROS_TEST	7090
+int main (void)
+{
+  int opcionElegida;
+  int numeroDeError;
+  float kilometrosIngresados;
+  float precioAerolineas;
+  float precioLatam;
+  float aerolineasDebito;
+  float aerolineasCredito;
+  float aerolineasBitcoin;
+  float aerolineasPrecioKilometros;
+  float latamDebito;
+  float latamCredito;
+  float latamBitcoin;
+  float latamPrecioKilometros;
+
+  kilometrosIngresados = 0;
+  precioAerolineas = 0;
+  precioLatam = 0;
+
+  do
+  {
+    numeroDeError = VuelosMenu (&opcionElegida, "\t\t\t Menu Principal", 3, 6, 1, "1-Ingresar Kilometros", "2-Ingresar Precio de Vuelos",
+				"3-Calcular Todos los costos\na) Tarjeta de debito (Descuento 10%)\nb) Tarjeta de credito (aumento 25%)\nc) Bitcoin(1BTC = 4606954.55)\n"
+				"d) Mostrar precio por km (Precio unitario)\ne) Mostrar diferencia de precio (Latam - aerolineas)",
+				"4-Informar Resultados\n""5-Carga Forzada\n6-Salir",kilometrosIngresados, precioAerolineas, precioLatam);
+
+    switch (opcionElegida)
+    {
+      case 1:
+	numeroDeError = GetFloatPositivo ("Ingrese los Kilometros: ", &kilometrosIngresados, "La distancia no es valida, reintente: ", 3);
+	break;
+      case 2:
+	numeroDeError = GetFloatPositivo ("Ingrese el precio de Aerolineas: ", &precioAerolineas, "El valor ingresado no es valido: ", 3);
+	numeroDeError = GetFloatPositivo ("Ingrese el precio de Latam: ", &precioLatam, "El valor ingresado no es valido: ", 3);
+	break;
+      case 3:
+	numeroDeError = calcularOperacionesVuelos (kilometrosIngresados, precioAerolineas, &aerolineasDebito, &aerolineasCredito, &aerolineasBitcoin,
+						   &aerolineasPrecioKilometros);
+	numeroDeError = calcularOperacionesVuelos (kilometrosIngresados, precioLatam, &latamDebito, &latamCredito, &latamBitcoin,
+						   &latamPrecioKilometros);
+	break;
+      case 4:
+
+	numeroDeError = imprimirResultadosVuelos(precioAerolineas, aerolineasDebito, aerolineasDebito, aerolineasBitcoin, aerolineasPrecioKilometros);
+	//numeroDeError = imprimirResultadosVuelos(precioLatam, latamDebito, latamCredito, latamBitcoin, latamPrecioKilometros);
+	break;
+      case 5:
+	break;
+      default:
+	puts ("=====================================================================================");
+	break;
+    }
+    if (numeroDeError == -1)
+    {
+      puts ("\n\n\t\tOcurrio un Error, un dato no pudo ser validado. Reincie el programa.");
+      break;
+    }
+  }
+  while (opcionElegida != 5 && opcionElegida != 6);
+}

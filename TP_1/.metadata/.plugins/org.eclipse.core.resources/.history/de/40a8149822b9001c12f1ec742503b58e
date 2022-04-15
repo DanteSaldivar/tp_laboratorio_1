@@ -1,0 +1,42 @@
+/*
+ ============================================================================
+ Name        : _PRUEBAS.c
+ Author      : 
+ Version     :
+ Copyright   : Your copyright notice
+ Description : Hello World in C, Ansi-style
+ ============================================================================
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void) {
+    float precioVuelo=1335000.66;
+    float kilometroIngresado=7090;
+    float precioDebito;
+    float precioCredito;
+    float precioBitcoin;
+    float precioKilometro;
+    int descuento;
+    int aumento;
+    float bitcoin;
+    descuento=10;
+    aumento=25;
+    bitcoin= 4606954.55;
+
+    precioDebito = (precioVuelo*descuento)-precioVuelo;
+
+     precioCredito = (precioVuelo*aumento)+precioVuelo;
+
+     precioBitcoin = (precioVuelo*100)/bitcoin;
+
+     precioKilometro = precioVuelo / kilometroIngresado;
+
+     printf("%f\n%f\n%f\n%f\n",precioDebito,precioCredito,precioBitcoin,precioKilometro);
+
+
+
+
+    return 0;
+}

@@ -1,0 +1,252 @@
+/*
+ * Biblioteca.c
+ *
+ *  Created on: Apr 9, 2022
+ *      Author: dante
+ */
+
+#include "Biblioteca.h"
+
+//PEDIR DATOS
+
+int GetInt (char mensaje[], int reintentos, int minimo, int maximo, char mensajeError[], int *pNumeroIngresado)
+{
+  int retorno = -1;
+  int auxiliarInt;
+  int retornoScanf;
+
+  if (mensaje != NULL && minimo < maximo && mensajeError != NULL && pNumeroIngresado != NULL && reintentos > 0)
+  {
+    printf ("%s", mensaje);
+    retornoScanf = scanf ("%d", &auxiliarInt);
+
+    do
+    {
+      if (retornoScanf != 1 || auxiliarInt > maximo || auxiliarInt < minimo)
+      {
+	printf ("%s", mensajeError);
+	retornoScanf = scanf ("%d", &auxiliarInt);
+	reintentos--;
+      }
+      else
+      {
+	reintentos = 0;
+	*pNumeroIngresado = auxiliarInt;
+	retorno = 0;
+      }
+    }
+    while (reintentos > 0);
+  }
+  return retorno;
+}
+int GetInt_simple (char mensaje[], char mensajeError[], float *pNumeroIngresado)
+{
+  int retorno = -1;
+  int auxiliarInt;
+  int retornoScanf;
+
+  printf ("%s", mensaje);
+  retornoScanf = scanf ("%d", &auxiliarInt);
+  if (retornoScanf != 0)
+  {
+    printf ("%s", mensajeError);
+    retornoScanf = scanf ("%d", &auxiliarInt);
+  }
+  else
+  {
+    *pNumeroIngresado = auxiliarInt;
+    retorno = 0;
+  }
+  return retorno;
+}
+void CargarArray (int array[], int tamano)
+{
+  for (int i = 0; i < tamano; i++)
+  {
+    array[i] = i;
+  }
+}
+void ImprimirArray (float array[], int tamano)
+{
+  for (int i = 0; i < tamano; i++)
+  {
+    array[i] = i;
+    printf ("\n%f", array[i]);
+  }
+}
+void MainMenu (int *pNumeroIngresado, char mensaje[], int reintentos, char opcion1[], char opcion2[], char opcion3[], char opcion4[])
+{
+  int auxiliar;
+  puts ("=====================================================================================");
+
+  if (mensaje != NULL && opcion1 != NULL && opcion2 != NULL && opcion3 != NULL && opcion4 != NULL && reintentos < 100 && reintentos > 0)
+  {
+    printf ("%s", mensaje);
+    printf ("\n1-para %s\n2-para %s\n3-para %s\n4-para %s ", opcion1, opcion2, opcion3, opcion4);
+    scanf ("%d", &auxiliar);
+
+    while (reintentos != 0)
+    {
+      if (auxiliar != 1 && auxiliar != 2 && auxiliar != 3 && auxiliar != 4)
+      {
+	puts ("\n~~~~~~ERROR~~~~~~~~~");
+	printf ("\n1-para %s\n2-para %s\n3-para %s\n4-para %s ", opcion1, opcion2, opcion3, opcion4);
+	scanf ("%d", &auxiliar);
+	reintentos--;
+      }
+      else
+      {
+	reintentos = 0;
+	*pNumeroIngresado = auxiliar;
+      }
+    }
+  }
+  else
+  {
+    puts ("\n\t\t\t~~~~~~ERROR~~~~~~~~~\n\t\tIngrese las condiciones nuevamente");
+  }
+}
+
+int AerolineasMenu (int *pNumeroIngresado)
+{
+  int auxiliar;
+  int resultado;
+  int rtn;
+  rtn=-1;
+  puts ("===============================Menu Principal===========================\n");
+
+
+  puts ("1-Ingresar Kilometros\n2-Ingresar Precio de Vuelos\n3-Calcular Todos los costos\n5-Carga Forzada\n6-Salir");
+  resultado=scanf ("%d", &auxiliar);
+  if(resultado!=0)
+  {
+    while (auxiliar != 1 && auxiliar != 2 && auxiliar != 3 && auxiliar != 4&& auxiliar != 5&& auxiliar != 6)
+    {
+      puts ("~~~~~~ERROR~~~~~~~~~\nDatoIngresado No Valido, intente nuevamente");
+      scanf ("%d", &auxiliar);
+    }
+    *pNumeroIngresado = auxiliar;
+    rtn=0;
+  }else
+  {
+    puts("Ocurrio un Error al ejecutar, reinicie el programa");
+  }
+  return rtn;
+}
+int GetFloatPositivo(char mensaje[],float *pNumeroIngresado,char mensajeError[])
+{
+   int retorno = -1;
+   float auxiliarInt;
+   int retornoScanf;
+
+    printf ("%s", mensaje);
+    retornoScanf = scanf ("%f", &auxiliarInt);
+    if (retornoScanf != 0)
+    {
+        while(auxiliarInt<0)
+      {
+      printf ("%s", mensajeError);
+      retornoScanf = scanf ("%f", &auxiliarInt);
+      }
+      *pNumeroIngresado = auxiliarInt;
+      retorno = 0;
+    }
+    else
+    {
+      printf ("%s", mensajeError);
+    }
+    return retorno;
+}
+
+//CALCULOS
+
+float Sumar (float numero1, float numero2)
+{
+  float resultado;
+  resultado = numero1 + numero2;
+  return resultado;
+}
+float Restar (float numero1, float numero2)
+{
+  float resultado;
+  resultado = numero1 - numero2;
+  return resultado;
+}
+float Multiplicar (float numero1, float numero2)
+{
+  float resultado;
+  resultado = numero1 * numero2;
+  return resultado;
+}
+float Dividir (float divisor, float dividendo)
+{
+  float cociente;
+  if (dividendo != 0)
+  {
+    cociente = divisor / dividendo;
+  }
+  else
+  {
+    cociente = 0;
+  }
+  return cociente;
+}
+void CalculosVuelos(float kilometrosIngresados, float precioVuelo, float preciosFinales[])
+{
+    float kilometroIngresado;
+    float precioDebito;
+    float precioCredito;
+    float precioBitcoin;
+    float precioKilometro;
+    float precios[4];
+    int descuento;
+    int aumento;
+    float bitcoin;
+    descuento=10;
+    aumento=25;
+    bitcoin= 4606954.55;
+
+    precioDebito = precioVuelo-(precioVuelo*descuento)/100;
+    precios[0] = precioDebito;
+     precioCredito = (precioVuelo*aumento)/100+precioVuelo;
+     precios[1] = precioCredito;
+     precioBitcoin = (precioVuelo/bitcoin);
+     precios[2] = precioBitcoin;
+     precioKilometro = precioVuelo / kilometroIngresado;
+     precios[3] = precioKilometro;
+
+    *preciosFinales = precios[4];
+ }
+
+int OperacionesVuelos(int numeroIngresado, float *kilometroIngresado, float *precioAerolineaIngresado, float *precioLatamIngresado)
+{
+  int retorno;
+  float kilometrosVuelo;
+  float precioAerolineas;
+  float precioLatam;
+  retorno=-1;
+    switch(numeroIngresado)
+  {
+    case 1:
+	retorno=GetFloatPositivo("Ingrese los Kilometros: ", &kilometrosVuelo, "~~~ERRORR~~~\nEl valor no es valido.");
+	*kilometroIngresado=kilometrosVuelo;
+      break;
+    case 2:
+	retorno=GetFloatPositivo("Ingrese el precio de Aerolineas: ", &precioAerolineas, "~~~ERRORR~~~\El precio no es valido.");
+	retorno=GetFloatPositivo("Ingrese el precio del vuelo Latam: " ,&precioLatam, "~~~ERRORR~~~\El precio no es valido.");
+	*precioAerolineaIngresado=precioAerolineas;
+	*precioLatamIngresado=precioLatam;
+      break;
+    case 3:
+
+      break;
+    case 4:
+      break;
+    case 5:
+      break;
+    case 6:
+      break;
+  }
+  return retorno;
+}
+

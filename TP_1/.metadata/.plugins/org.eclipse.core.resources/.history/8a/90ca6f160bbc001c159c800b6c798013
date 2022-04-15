@@ -1,0 +1,50 @@
+/*
+ ============================================================================
+ Name        : _prueba.c
+ Author      : DAnte
+ Version     :
+ Copyright   : Your copyright notice
+ Description : Hello World in C, Ansi-style
+ ============================================================================
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int calcularPorReglaSimple (float primerNumero, float segundoNumero, float tercerNumero, float *resultado);
+
+int main(void) {
+	float numeroA;
+	float numeroB;
+	float numeroC;
+	int resultado;
+	int error;
+
+
+	numeroA = 100;
+	numeroB = 1000;
+	numeroC = 20;
+
+
+	calcularPorReglaSimple(numeroA, numeroB, numeroC, &resultado);
+
+	printf("El resultado es %.2f",resultado);
+
+
+	return EXIT_SUCCESS;
+}
+
+int calcularPorReglaSimple (float primerNumero, float segundoNumero, float tercerNumero, float *resultado)
+{
+  int retorno;
+
+  retorno = -1;
+
+  if (primerNumero != 0 && resultado != NULL)
+  {
+    *resultado = (tercerNumero * segundoNumero) / primerNumero;
+    retorno = 0;
+  }
+
+  return retorno;
+}
