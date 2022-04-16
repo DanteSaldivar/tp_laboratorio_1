@@ -5,9 +5,9 @@
  *      Author: dante
  */
 
-#include "Biblioteca.h"
+#include "BibliotecaOperaciones.h"
 
-//PEDIR DATOS
+//PEDIR DATOS E IMPRIMIR DATOS
 
 int GetInt (char mensaje[], int reintentos, int minimo, int maximo, char mensajeError[], int *pNumeroIngresado)
 {
@@ -69,42 +69,8 @@ int GetFloat (char mensaje[], int reintentos, float minimo, float maximo, char m
   }
   return retorno;
 }
-int GetInt_simple (char mensaje[], char mensajeError[], float *pNumeroIngresado)
-{
-  int retorno = -1;
-  int auxiliarInt;
-  int retornoScanf;
-
-  printf ("%s", mensaje);
-  retornoScanf = scanf ("%d", &auxiliarInt);
-  if (retornoScanf != 0)
-  {
-    printf ("%s", mensajeError);
-    retornoScanf = scanf ("%d", &auxiliarInt);
-  }
-  else
-  {
-    *pNumeroIngresado = auxiliarInt;
-    retorno = 0;
-  }
-  return retorno;
-}
-void CargarArray (int array[], int tamano)
-{
-  for (int i = 0; i < tamano; i++)
-  {
-    array[i] = i;
-  }
-}
-void ImprimirArray (float array[], int tamano)
-{
-  for (int i = 0; i < tamano; i++)
-  {
-    printf ("\n%f", array[i]);
-  }
-}
-int VuelosMenu (int *pNumeroIngresado, char mensaje[], int reintentos, int maximo, int minimo, char opcion1[], char opcion2[], char opcion3[],
-		char opcion4[], float kilometros, float precioAerolineas, float precioLatam)
+int VuelosMenu (int *pNumeroIngresado, char mensaje[], int reintentos, int maximo, int minimo, char opcion1[], char opcion2[], char opcion3[], float kilometros, float precioAerolineas,
+		float precioLatam)
 {
   int auxiliarInt;
   int retornoScanf;
@@ -114,11 +80,10 @@ int VuelosMenu (int *pNumeroIngresado, char mensaje[], int reintentos, int maxim
 
   puts ("=====================================================================================");
 
-  if (mensaje != NULL && opcion1 != NULL && opcion2 != NULL && opcion3 != NULL && opcion4 != NULL && reintentos > 0 && minimo < maximo)
+  if (mensaje != NULL && opcion1 != NULL && opcion2 != NULL && opcion3 != NULL && reintentos > 0 && minimo < maximo)
   {
     printf ("%s", mensaje);
-    printf ("\n%s(km = %.2f)\n\n%s (Aerolineas = $ %.2f/Latam = $ %.2f)\n\n%s\n\n%s\n ", opcion1, kilometros, opcion2, precioAerolineas, precioLatam,
-	    opcion3, opcion4);
+    printf ("\n%s(km = %.2f)\n%s (Aerolineas = $ %.2f/Latam = $ %.2f)\n%s\n ", opcion1, kilometros, opcion2, precioAerolineas, precioLatam, opcion3);
     retornoScanf = scanf ("%d", &auxiliarInt);
 
     do
@@ -174,26 +139,25 @@ int ImprimirDiferencia (float primerNumero, float segundoNumero, char mensaje[])
 {
   float diferencia;
   int retorno;
-  retorno=-1;
+  retorno = -1;
 
   if (mensaje != NULL)
   {
-    if (primerNumero>segundoNumero)
+    if (primerNumero > segundoNumero)
     {
       diferencia = Restar (primerNumero, segundoNumero);
-      printf ("%s%.2f\n\n", mensaje, diferencia);
-      retorno =0;
+      retorno = 0;
     }
     else
     {
       diferencia = Restar (segundoNumero, primerNumero);
-      printf ("%s%.2f\n\n", mensaje, diferencia);
-      retorno =0;
+      retorno = 0;
     }
   }
+  printf ("%s%.2f\n\n", mensaje, diferencia);
   return retorno;
 }
-int ImprimirResultadosVuelos (char mensaje[],float precioVuelo, float gastoDebito, float gastoCredito, float gastoBitcoin, float gastoPorKilometro)
+int ImprimirResultadosVuelos (char mensaje[], float precioVuelo, float gastoDebito, float gastoCredito, float gastoBitcoin, float gastoPorKilometro)
 {
   int retorno;
 
@@ -201,22 +165,22 @@ int ImprimirResultadosVuelos (char mensaje[],float precioVuelo, float gastoDebit
 
   if (precioVuelo > 0 && gastoDebito > 0 && gastoCredito > 0 && gastoBitcoin > 0 && gastoPorKilometro > 0)
   {
-    printf ("\n%s : $ %.2f", mensaje , precioVuelo);
-    printf ("\na) Precio con tarjeta de Debito: $ %.2f",gastoDebito);
-    printf ("\nb) Precio con tarjeta de Credito: $ %.2f",gastoCredito);
-    printf ("\nc) Precio pagando con Bitcoin: %.2f BTC",gastoBitcoin);
-    printf ("\nd) Precio unitario (precio por Km): $ %.2f\n",gastoPorKilometro);
+    printf ("\n%s : $ %.2f", mensaje, precioVuelo);
+    printf ("\na) Precio con tarjeta de Debito: $ %.2f", gastoDebito);
+    printf ("\nb) Precio con tarjeta de Credito: $ %.2f", gastoCredito);
+    printf ("\nc) Precio pagando con Bitcoin: %.2f BTC", gastoBitcoin);
+    printf ("\nd) Precio unitario (precio por Km): $ %.2f\n", gastoPorKilometro);
 
     retorno = 0;
   }
   else
   {
-    printf("\nNo se encontradon resultados de %s\n", mensaje);
+    printf ("\nNo se encontradon resultados de %s\n", mensaje);
     retorno = 0;
   }
   return retorno;
 }
-int CargaForzadaVuelos(float kilometrosPrueba, float precioAerolineasPrueba, float precioLatamPrueba)
+int CargaForzadaVuelos (float kilometrosPrueba, float precioAerolineasPrueba, float precioLatamPrueba)
 {
   int retorno;
   float aerolineasDebito;
@@ -230,29 +194,21 @@ int CargaForzadaVuelos(float kilometrosPrueba, float precioAerolineasPrueba, flo
 
   retorno = 0;
 
-  retorno += CalcularOperacionesVuelos (kilometrosPrueba,precioAerolineasPrueba, &aerolineasDebito, &aerolineasCredito, &aerolineasBitcoin,
-				       &aerolineasKilometros);
-  retorno += CalcularOperacionesVuelos (kilometrosPrueba,precioLatamPrueba, &latamDebito, &latamCredito, &latamBitcoin,
-				       &latamPrecioKilometros);
-  printf ("\nKMs Ingresados: %.0f km\n",kilometrosPrueba);
-  retorno += ImprimirResultadosVuelos("Aerolineas",precioAerolineasPrueba, aerolineasDebito, aerolineasCredito, aerolineasBitcoin, aerolineasKilometros);
-  retorno += ImprimirResultadosVuelos("Latam",precioLatamPrueba, latamDebito, latamCredito, latamBitcoin, latamPrecioKilometros);
-  retorno += ImprimirDiferencia(precioAerolineasPrueba, precioLatamPrueba, "\nLa diferencia de precio es de $ ");
+  retorno += CalcularOperacionesVuelos (kilometrosPrueba, precioAerolineasPrueba, &aerolineasDebito, &aerolineasCredito, &aerolineasBitcoin, &aerolineasKilometros);
+  retorno += CalcularOperacionesVuelos (kilometrosPrueba, precioLatamPrueba, &latamDebito, &latamCredito, &latamBitcoin, &latamPrecioKilometros);
+  printf ("\nKMs Ingresados: %.0f km\n", kilometrosPrueba);
+  retorno += ImprimirResultadosVuelos ("Aerolineas", precioAerolineasPrueba, aerolineasDebito, aerolineasCredito, aerolineasBitcoin, aerolineasKilometros);
+  retorno += ImprimirResultadosVuelos ("Latam", precioLatamPrueba, latamDebito, latamCredito, latamBitcoin, latamPrecioKilometros);
+  retorno += ImprimirDiferencia (precioAerolineasPrueba, precioLatamPrueba, "\nLa diferencia de precio es de $ ");
 
   if (retorno != 0)
   {
-    puts("Hubo un error al cargar los datos Forzadamente.");
+    puts ("Hubo un error al cargar los datos Forzadamente.");
   }
   return retorno;
 }
 
-
-
-
 //CALCULOS
-
-
-
 
 float Sumar (float numero1, float numero2)
 {
@@ -295,16 +251,15 @@ int CalcularPorReglaSimple (float primerNumero, float segundoNumero, float terce
 
   if (primerNumero != 0 && resultado != NULL)
   {
-    resultadoMultiplicacion= Multiplicar(tercerNumero, segundoNumero);
-    resultadoAuxiliar= Dividir(resultadoMultiplicacion, primerNumero);
+    resultadoMultiplicacion = Multiplicar (tercerNumero, segundoNumero);
+    resultadoAuxiliar = Dividir (resultadoMultiplicacion, primerNumero);
     *resultado = resultadoAuxiliar;
     retorno = 0;
   }
 
   return retorno;
 }
-int CalcularOperacionesVuelos (float kilometros, float precioVuelo, float *costoDebito, float *costoCredito, float *costoBitcoin,
-			       float *costoPorKilometro)
+int CalcularOperacionesVuelos (float kilometros, float precioVuelo, float *costoDebito, float *costoCredito, float *costoBitcoin, float *costoPorKilometro)
 {
   float retorno;
   float descuentoDebito;
@@ -324,7 +279,7 @@ int CalcularOperacionesVuelos (float kilometros, float precioVuelo, float *costo
   {
     retorno += CalcularPorReglaSimple (100, precioVuelo, descuento, &descuentoDebito);
     retorno += CalcularPorReglaSimple (100, precioVuelo, aumento, &aumentoCredito);
-    retorno += CalcularPorReglaSimple(bitcoin, 1, precioVuelo, &precioBitcoin);
+    retorno += CalcularPorReglaSimple (bitcoin, 1, precioVuelo, &precioBitcoin);
     retorno += CalcularPorReglaSimple (kilometros, precioVuelo, 1, &precioKilometro);
 
     if (retorno == 0)
@@ -343,7 +298,7 @@ int CalcularOperacionesVuelos (float kilometros, float precioVuelo, float *costo
   }
   else
   {
-    puts("No se Ingresaron o faltan datos.");
+    puts ("No se Ingresaron o faltan datos.");
   }
 
   return retorno;

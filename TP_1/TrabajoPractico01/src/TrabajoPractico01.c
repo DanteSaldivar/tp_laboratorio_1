@@ -1,14 +1,21 @@
 /*
  ============================================================================
- Name        : TrabajoPractico01.c
- Author      : 
- Version     :
- Copyright   : Your copyright notice
- Description : Hello World in C, Ansi-style
+
+ * Programa: Calculadora de costos Agencia de viaje
+ *
+ * Objetivo:
+   Al ingresar por cada vuelo los KMs totales y el precio total del mismo,
+   mostrar las diferences opciones de pagos a sus clientes.
+ *
+ *
+ *
+ * Autor : Dante Saldivar
+
+ Division 1-H
  ============================================================================
  */
 
-#include "Biblioteca.h"
+#include "BibliotecaOperaciones.h"
 #define PRICE_TEST_AEROLINEAS 162965
 #define PRICE_TEST_LATAM 159339
 #define KILOMETERS_TEST	7090
@@ -36,10 +43,8 @@ int main (void)
 
   do
   {
-    numeroDeError = VuelosMenu (&opcionElegida, "\t\t\t Menu Principal", 3, 6, 1, "1-Ingresar Kilometros", "2-Ingresar Precio de Vuelos",
-				"3-Calcular Todos los costos:\na) Tarjeta de debito (Descuento 10%)\nb) Tarjeta de credito (aumento 25%)\nc) Bitcoin(1BTC = 4606954.55)\n"
-				"d) Mostrar precio por km (Precio unitario)\ne) Mostrar diferencia de precio (Latam - aerolineas)",
-				"4-Informar Resultados\n""5-Carga Forzada\n6-Salir",kilometrosIngresados, precioAerolineas, precioLatam);
+    numeroDeError = VuelosMenu (&opcionElegida, "\t\t\t Menu Principal\n", 3, 6, 1, "1-Ingresar Kilometros", "2-Ingresar Precio de Vuelos",
+				"3-Calcular Todos los costos\n4-Informar Resultados\n5-Carga Forzada\n6-Salir", kilometrosIngresados, precioAerolineas, precioLatam);
 
     switch (opcionElegida)
     {
@@ -51,21 +56,19 @@ int main (void)
 	numeroDeError += GetFloatPositivo ("Ingrese el precio de Latam: ", &precioLatam, "El valor ingresado no es valido: ", 3);
 	break;
       case 3:
-	numeroDeError += CalcularOperacionesVuelos (kilometrosIngresados,precioAerolineas, &aerolineasDebito, &aerolineasCredito, &aerolineasBitcoin,
-						   &aerolineasPrecioKilometros);
-	numeroDeError += CalcularOperacionesVuelos (kilometrosIngresados,precioLatam, &latamDebito, &latamCredito, &latamBitcoin,
-						   &latamPrecioKilometros);
+	numeroDeError += CalcularOperacionesVuelos (kilometrosIngresados, precioAerolineas, &aerolineasDebito, &aerolineasCredito, &aerolineasBitcoin, &aerolineasPrecioKilometros);
+	numeroDeError += CalcularOperacionesVuelos (kilometrosIngresados, precioLatam, &latamDebito, &latamCredito, &latamBitcoin, &latamPrecioKilometros);
 	break;
       case 4:
-	numeroDeError += ImprimirResultadosVuelos("Aerolineas",precioAerolineas, aerolineasDebito, aerolineasCredito, aerolineasBitcoin, aerolineasPrecioKilometros);
-	numeroDeError += ImprimirResultadosVuelos("Latam",precioLatam, latamDebito, latamCredito, latamBitcoin, latamPrecioKilometros);
+	numeroDeError += ImprimirResultadosVuelos ("Aerolineas", precioAerolineas, aerolineasDebito, aerolineasCredito, aerolineasBitcoin, aerolineasPrecioKilometros);
+	numeroDeError += ImprimirResultadosVuelos ("Latam", precioLatam, latamDebito, latamCredito, latamBitcoin, latamPrecioKilometros);
 	if (precioAerolineas != 0 || precioLatam != 0)
 	{
-	  ImprimirDiferencia(precioAerolineas, precioLatam, "\nLa diferencia de precio es: $ ");
+	  ImprimirDiferencia (precioAerolineas, precioLatam, "\nLa diferencia de precio es: $ ");
 	}
 	break;
       case 5:
-	numeroDeError = CargaForzadaVuelos(KILOMETERS_TEST, PRICE_TEST_AEROLINEAS, PRICE_TEST_LATAM);
+	numeroDeError = CargaForzadaVuelos (KILOMETERS_TEST, PRICE_TEST_AEROLINEAS, PRICE_TEST_LATAM);
 	break;
       default:
 	puts ("=====================================================================================");
@@ -75,7 +78,7 @@ int main (void)
     if (numeroDeError != 0)
     {
       puts ("\n\n\t\tOcurrio un Error, un dato no pudo ser validado. Reincie el programa.");
-      break;
+      break; 		// "Para evitar Que entre en bucle para siempre al ingresar una Letra en las distintas funciones."
     }
   }
   while (opcionElegida != 5 && opcionElegida != 6);

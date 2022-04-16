@@ -4,15 +4,15 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-../src/Biblioteca.c \
+../src/BibliotecaOperaciones.c \
 ../src/TrabajoPractico01.c 
 
 C_DEPS += \
-./src/Biblioteca.d \
+./src/BibliotecaOperaciones.d \
 ./src/TrabajoPractico01.d 
 
 OBJS += \
-./src/Biblioteca.o \
+./src/BibliotecaOperaciones.o \
 ./src/TrabajoPractico01.o 
 
 
@@ -28,7 +28,7 @@ src/%.o: ../src/%.c src/subdir.mk
 clean: clean-src
 
 clean-src:
-	-$(RM) ./src/Biblioteca.d ./src/Biblioteca.o ./src/TrabajoPractico01.d ./src/TrabajoPractico01.o
+	-$(RM) ./src/BibliotecaOperaciones.d ./src/BibliotecaOperaciones.o ./src/TrabajoPractico01.d ./src/TrabajoPractico01.o
 
 .PHONY: clean-src
 
