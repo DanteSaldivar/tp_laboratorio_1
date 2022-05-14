@@ -89,11 +89,10 @@ int main(void)
 							ePassenger_Promedios(arrayPassengers, MAX_PASSENGERS);
 							break;
 						case 3:
-							eVuelo_Sort(arrayVuelos, MAX_VUELOS, 1); /// ORDENO POR ID
-							eVuelo_Sort(arrayVuelos, MAX_VUELOS, -1); /// ORDENO DE MENOR A MAYOR
-							//ePassenFly_SortPassengerByCode(arrayPassengers, MAX_PASSENGERS, arrayVuelos, MAX_VUELOS, 1); //ORDENO DEPENDIENDO DEL FK
-							//ePassenger_PrintPassengers(arrayPassengers, MAX_PASSENGERS);
-							//eVuelo_ImprimirVuelosPorEstado(arrayVuelos, MAX_VUELOS, ACTIVO);
+							eVuelo_Sort(arrayVuelos, MAX_VUELOS, 1);
+							// ORDENO POR ID
+							ePassenFly_SortPassengerByCode(arrayPassengers, MAX_PASSENGERS, arrayVuelos, MAX_VUELOS, -1);
+							// ORDENO DE MENOR A MAYOR
 							ePassenFly_printPassengers_Flys(arrayPassengers, MAX_PASSENGERS, arrayVuelos, MAX_VUELOS);
 							break;
 						}

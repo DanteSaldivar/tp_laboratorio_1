@@ -131,10 +131,11 @@ int ePassenFly_SortPassengerByCode(ePassenger arrayPassengers[], int passengerLe
 	int nuevoLimite;
 	int i;
 	eVuelo buffer;
-
+	puts("HOLLAA");
 	//ORDENO EL ARRAY DE VUELOS DE MANERA DESCENDENTE Y ASCENDETE 1 -1
-	if (arrayPassengers != NULL && ArrayVuelos != NULL && passengerLen > 0 && vuelosLen > 0 && order > 0)
+	if (arrayPassengers != NULL && ArrayVuelos != NULL && passengerLen > 0 && vuelosLen > 0)
 	{
+		puts("HOLLAA");
 		nuevoLimite = vuelosLen;
 
 		switch (order)
@@ -142,6 +143,7 @@ int ePassenFly_SortPassengerByCode(ePassenger arrayPassengers[], int passengerLe
 		case 1:
 			do
 			{
+				puts("HOLLAA");
 				flagSwap = 0;
 				for (i = 0; i < nuevoLimite; i++)
 				{
@@ -158,10 +160,12 @@ int ePassenFly_SortPassengerByCode(ePassenger arrayPassengers[], int passengerLe
 				}
 				nuevoLimite--;
 			} while (flagSwap);
+			retorno = 0;
 			break;
 		case -1:
 			do
 			{
+				puts("HOLLAA");
 				flagSwap = 0;
 				for (i = 0; i < nuevoLimite; i++)
 				{
@@ -178,6 +182,7 @@ int ePassenFly_SortPassengerByCode(ePassenger arrayPassengers[], int passengerLe
 				}
 				nuevoLimite--;
 			} while (flagSwap);
+			retorno = 0;
 			break;
 		}
 	}
@@ -323,7 +328,6 @@ int ePassenFly_printPassengers_Flys(ePassenger arrayPassengers[], int passengerL
 	int retorno = -1;
 	int i;
 	int banderaMensaje = 1;
-	//int FkID;
 	int indexPassenger;
 	int banderaPrimerIngreso;
 	int ultimoID;
@@ -352,7 +356,6 @@ int ePassenFly_printPassengers_Flys(ePassenger arrayPassengers[], int passengerL
 				{
 					if (ultimoID != indexPassenger)
 					{
-						//indexPassenger = ePassenger_FindPassengerById(arrayPassengers, passengerLen, ArrayVuelos[i].idVuelo);
 						ePassenFly_printPassenger_Fly(arrayPassengers[indexPassenger], ArrayVuelos[i]);
 						ultimoID = indexPassenger;
 					}
